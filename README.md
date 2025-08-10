@@ -38,3 +38,9 @@ streamlit run streamlit_app.py
 ```
 uvicorn main:app --reload --port 8000
 ```
+
+api sources:
+https://foursquare.com/
+https://console.cloud.google.com/google/map
+https://app.exchangerate-api.com/
+https://home.openweathermap.org/

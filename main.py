@@ -21,12 +21,14 @@ app.add_middleware(
 class QueryRequest(BaseModel):
     question: str
 
-@app.post("/query")
-async def query_travel_agent(query:QueryRequest):
+@app.post("/query") # it triggers query_travel_agent with query input
+# GET → Client asks the server for data.
+# POST → Client sends data to the server.
+async def query_travel_agent(query:QueryRequest): # take a query from a user
     try:
         print(query)
-        graph = GraphBuilder(model_provider="groq")
-        react_app=graph()
+        graph = GraphBuilder(model_provider="openai")
+        react_app=graph() # same as build_graph() but we don't need it as we have __call__
         #react_app = graph.build_graph()
 
         png_graph = react_app.get_graph().draw_mermaid_png()
@@ -39,10 +41,10 @@ async def query_travel_agent(query:QueryRequest):
         output = react_app.invoke(messages)
 
         # If result is dict with messages:
-        if isinstance(output, dict) and "messages" in output:
+        if isinstance(output, dict) and "messages" in output: #-> if travel agent analysis was done
             final_output = output["messages"][-1].content  # Last AI response
         else:
-            final_output = str(output)
+            final_output = str(output) # if we immediately went to END
         
         return {"answer": final_output}
     except Exception as e:

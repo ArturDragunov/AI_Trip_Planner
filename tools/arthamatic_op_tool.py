@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from langchain.tools import tool
-from langchain_community.utilities.alpha_vantage import AlphaVantageAPIWrapper
+from langchain_community.utilities.alpha_vantage import AlphaVantageAPIWrapper # for currency conversion
 
 @tool
 def multiply(a: int, b: int) -> int:

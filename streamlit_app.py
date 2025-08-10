@@ -2,9 +2,6 @@ import streamlit as st
 import requests
 import datetime
 
-# from exception.exceptions import TradingBotException
-import sys
-
 BASE_URL = "http://localhost:8000"  # Backend endpoint
 
 st.set_page_config(
@@ -17,7 +14,7 @@ st.set_page_config(
 st.title("🌍 Travel Planner Agentic Application")
 
 # Initialize chat history
-if "messages" not in st.session_state:
+if "messages" not in st.session_state: # if messages key exists in session_state dict object. if not, initialize it.
     st.session_state.messages = []
 
 # Display chat history
@@ -28,15 +25,17 @@ with st.form(key="query_form", clear_on_submit=True):
     user_input = st.text_input("User Input", placeholder="e.g. Plan a trip to Goa for 5 days")
     submit_button = st.form_submit_button("Send")
 
-if submit_button and user_input.strip():
+if submit_button and user_input.strip(): # strip() -> no leading or trailing whitespaces
     try:
         # # Show user message
         # Show thinking spinner while backend processes
         with st.spinner("Bot is thinking..."):
             payload = {"question": user_input}
             response = requests.post(f"{BASE_URL}/query", json=payload)
-
-        if response.status_code == 200:
+            # a user makes an input -> asks a question. Now, we take this question and make a post url to ourselves
+            # main.py is now triggered and it does all the necessary calculations.
+            # so this way you can have many users doing a request
+        if response.status_code == 200: # if we got an answer (code 200)
             answer = response.json().get("answer", "No answer returned.")
             markdown_content = f"""# 🌍 AI Travel Plan
 
@@ -56,4 +55,4 @@ if submit_button and user_input.strip():
             st.error(" Bot failed to respond: " + response.text)
 
     except Exception as e:
-        raise f"The response failed due to {e}"
+        raise RuntimeError(f"The response failed due to {e}")

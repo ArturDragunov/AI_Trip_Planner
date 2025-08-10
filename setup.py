@@ -1,3 +1,7 @@
+# The setup.py file is used to define this project as a Python package. 
+# It allows tools like pip to install the package and its dependencies,
+# and makes it possible to use the codebase in other projects or development environments.
+
 from setuptools import find_packages,setup
 from typing import List
 
@@ -30,8 +34,8 @@ print(get_requirements())
 setup(
     name="AI-TRAVEL-PLANNER",
     version="0.0.1",
-    author="sunny savita",
-    author_email="snshrivas3365@gmail.com",
+    author="artur dragunov",
+    author_email="artur.dragunov.career@gmail.com",
     packages = find_packages(),
     install_requires=get_requirements()
 )

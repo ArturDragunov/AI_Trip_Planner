@@ -15,5 +15,12 @@ langchain_openai
 langgraph
 langchain-google-community[places]
 
+# Install the local package in editable mode.
+# Each folder should have an __init__.py file to be recognized as a Python package.
+# This allows you to import functions using the package name without specifying the full path.
+# Using -e . installs the entire project in editable mode inside the virtual environment (venv),
+# which helps avoid relative import issues often faced in modular Python projects like MSD.
+# Technically, __init__.py is optional in Python 3.3+,
+# but we include it to clearly define packages and ensure compatibility with tools like setuptools.
 
 -e .

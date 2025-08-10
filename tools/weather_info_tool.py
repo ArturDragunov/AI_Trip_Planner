@@ -8,10 +8,10 @@ class WeatherInfoTool:
     def __init__(self):
         load_dotenv()
         self.api_key = os.environ.get("OPENWEATHERMAP_API_KEY")
-        self.weather_service = WeatherForecastTool(self.api_key)
+        self.weather_service = WeatherForecastTool(self.api_key) # fetching data from API
         self.weather_tool_list = self._setup_tools()
     
-    def _setup_tools(self) -> List:
+    def _setup_tools(self) -> List: # your tools are initialized inside this method and are then returned
         """Setup all tools for the weather forecast tool"""
         @tool
         def get_current_weather(city: str) -> str:
